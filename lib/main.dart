@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/add_clothing_screen.dart';
+import 'screens/main_navigation_screen.dart';
 
 void main() {
   runApp(const WardrobeApp());
@@ -14,8 +14,13 @@ class WardrobeApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const AddClothingScreen(),
+
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor:
+            const Color(0xFF121212),
+      ),
+
+      home: const MainNavigationScreen(),
     );
   }
 }
