@@ -20,6 +20,8 @@ class _AddClothingScreenState
   final colorController = TextEditingController();
 
   String category = 'shirt';
+  String style = 'casual';
+  String season = 'all';
 
   File? selectedImage;
 
@@ -43,9 +45,17 @@ class _AddClothingScreenState
     if (selectedImage == null) return;
 
     await ApiService.uploadClothing(
+
       name: nameController.text,
+
       category: category,
+
       color: colorController.text,
+
+      style: style,
+
+      season: season,
+
       image: selectedImage!,
     );
 
@@ -129,6 +139,76 @@ class _AddClothingScreenState
                 setState(() {
                   category = value!;
                 });
+              },
+            ),
+
+            const SizedBox(height: 10),
+
+            DropdownButton<String>(
+
+              value: style,
+
+              isExpanded: true,
+
+              items: const [
+
+                DropdownMenuItem(
+                  value: 'casual',
+                  child: Text('Casual'),
+                ),
+
+                DropdownMenuItem(
+                  value: 'formal',
+                  child: Text('Formal'),
+                ),
+
+                DropdownMenuItem(
+                  value: 'sport',
+                  child: Text('Sport'),
+                ),
+              ],
+
+              onChanged: (value) {
+
+                setState(() {
+                  style = value!;
+                });
+
+              },
+            ),
+
+            const SizedBox(height: 10),
+
+            DropdownButton<String>(
+
+              value: season,
+
+              isExpanded: true,
+
+              items: const [
+
+                DropdownMenuItem(
+                  value: 'summer',
+                  child: Text('Summer'),
+                ),
+
+                DropdownMenuItem(
+                  value: 'winter',
+                  child: Text('Winter'),
+                ),
+
+                DropdownMenuItem(
+                  value: 'all',
+                  child: Text('All Season'),
+                ),
+              ],
+
+              onChanged: (value) {
+
+                setState(() {
+                  season = value!;
+                });
+
               },
             ),
 

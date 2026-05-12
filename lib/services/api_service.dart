@@ -12,6 +12,8 @@ class ApiService {
     required String name,
     required String category,
     required String color,
+    required String style,
+    required String season,
     required File image,
   }) async {
 
@@ -23,7 +25,8 @@ class ApiService {
     request.fields['name'] = name;
     request.fields['category'] = category;
     request.fields['color'] = color;
-
+    request.fields['style'] = style;
+    request.fields['season'] = season;
     request.files.add(
       await http.MultipartFile.fromPath(
         'image',

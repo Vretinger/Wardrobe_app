@@ -22,7 +22,7 @@ class ClothingCard extends StatelessWidget {
 
           Expanded(
             child: Image.network(
-              item.imageUrl,
+              item.image,
               width: double.infinity,
               fit: BoxFit.cover,
             ),

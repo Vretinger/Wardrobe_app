@@ -32,49 +32,6 @@ class _PackingListScreenState
     );
   }
 
-  Widget buildSection(
-  String title,
-  List<dynamic> items,
-) {
-  return Card(
-    margin: const EdgeInsets.only(bottom: 16),
-
-    child: Padding(
-      padding: const EdgeInsets.all(16),
-
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-
-          const SizedBox(height: 10),
-
-          ...items.map((item) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 6),
-
-              child: Row(
-                children: [
-                  const Icon(Icons.check_circle, size: 18),
-                  const SizedBox(width: 10),
-                  Text(item.toString()),
-                ],
-              ),
-            );
-          }).toList(),
-        ],
-      ),
-    ),
-  );
-}
-
   @override
   Widget build(BuildContext context) {
 
@@ -105,19 +62,10 @@ class _PackingListScreenState
 
           final data = snapshot.data!;
 
-          // 🔥 DEBUG OUTPUT (THIS IS THE CORRECT PLACE)
-          print(data);
-
           return ListView(
             padding: const EdgeInsets.all(16),
 
             children: [
-
-              // temporary debug view in UI
-              Text(
-                data.toString(),
-                style: const TextStyle(fontSize: 12),
-              ),
 
               const SizedBox(height: 20),
 
@@ -159,10 +107,41 @@ class _PackingListScreenState
                   }).toList(),
                 ),
 
-              buildSection('Shirts', data['shirts']),
-              buildSection('Pants', data['pants']),
-              buildSection('Shoes', data['shoes']),
-              buildSection('Jackets', data['jackets']),
+              Card(
+                child: ListTile(
+                  title: const Text('Shirts'),
+                  trailing: Text(
+                    '${data['shirts']}',
+                  ),
+                ),
+              ),
+
+              Card(
+                child: ListTile(
+                  title: const Text('Pants'),
+                  trailing: Text(
+                    '${data['pants']}',
+                  ),
+                ),
+              ),
+
+              Card(
+                child: ListTile(
+                  title: const Text('Shoes'),
+                  trailing: Text(
+                    '${data['shoes']}',
+                  ),
+                ),
+              ),
+
+              Card(
+                child: ListTile(
+                  title: const Text('Jackets'),
+                  trailing: Text(
+                    '${data['jackets']}',
+                  ),
+                ),
+              ),
             ],
           );
         },

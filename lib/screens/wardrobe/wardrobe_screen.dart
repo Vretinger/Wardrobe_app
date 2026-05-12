@@ -37,54 +37,39 @@ class _WardrobeScreenState
 
         builder: (context, snapshot) {
 
-          if (snapshot.connectionState ==
-              ConnectionState.waiting) {
-
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
-
             return Center(
-              child: Text(
-                'Error: ${snapshot.error}',
-              ),
+              child: Text('Error: ${snapshot.error}'),
             );
           }
 
+          if (!snapshot.hasData || snapshot.data == null) {
+            return const Center(child: Text('No clothing items yet'));
+          }
+
           final clothes = snapshot.data!
-              .map(
-                (json) => ClothingItem.fromJson(json),
-              )
+              .map((json) => ClothingItem.fromJson(json))
               .toList();
 
           if (clothes.isEmpty) {
-
-            return const Center(
-              child: Text('No clothing items yet'),
-            );
+            return const Center(child: Text('No clothing items yet'));
           }
 
           return GridView.builder(
             padding: const EdgeInsets.all(10),
-
-            gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.7,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
             ),
-
             itemCount: clothes.length,
-
             itemBuilder: (context, index) {
-
-              return ClothingCard(
-                item: clothes[index],
-              );
+              return ClothingCard(item: clothes[index]);
             },
           );
         },
